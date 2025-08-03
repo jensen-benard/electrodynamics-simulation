@@ -1,1 +1,1 @@
-# electrodynamics-simulation
+# Electrodynamics Simulation
