@@ -84,7 +84,7 @@ TEST_CASE("Vector3 can be subtracted", "[vector3]") {
 }
 
 
-TEST_CASE("Vector3 can be multiplied element wise", "[vector3]") {
+TEST_CASE("Vector3 can be multiplied element wise both ways", "[vector3]") {
     double v1_x = 1;
     double v1_y = 2;
     double v1_z = 3;
@@ -108,6 +108,26 @@ TEST_CASE("Vector3 can be multiplied element wise", "[vector3]") {
 }
 
 
+TEST_CASE("Vector3 can be multiplied by scalar", "[vector3]") {
+    double v1_x = 1;
+    double v1_y = 2;
+    double v1_z = 3;
+    Vector3 v1(v1_x, v1_y, v1_z);
+
+    double scalar = 2;
+
+    double v2_x = v1_x * scalar;
+    double v2_y = v1_y * scalar;
+    double v2_z = v1_z * scalar;
+
+    // Action
+    Vector3 v2 = v1 * scalar;
+
+    REQUIRE_THAT(v2.x, Catch::Matchers::WithinAbs(v2_x, margin));
+    REQUIRE_THAT(v2.y, Catch::Matchers::WithinAbs(v2_y, margin));
+    REQUIRE_THAT(v2.z, Catch::Matchers::WithinAbs(v2_z, margin));
+}
+
 TEST_CASE("Vector3 can be divided element wise", "[vector3]") {
     double v1_x = 1;
     double v1_y = 2;
@@ -129,6 +149,26 @@ TEST_CASE("Vector3 can be divided element wise", "[vector3]") {
     REQUIRE_THAT(v3.x, Catch::Matchers::WithinAbs(v3_x, margin));
     REQUIRE_THAT(v3.y, Catch::Matchers::WithinAbs(v3_y, margin));
     REQUIRE_THAT(v3.z, Catch::Matchers::WithinAbs(v3_z, margin));
+}
+
+TEST_CASE("Vector3 can be divided by scalar", "[vector3]") {
+    double v1_x = 1;
+    double v1_y = 2;
+    double v1_z = 3;
+    Vector3 v1(v1_x, v1_y, v1_z);
+
+    double scalar = 2;
+
+    double v2_x = v1_x / scalar;
+    double v2_y = v1_y / scalar;
+    double v2_z = v1_z / scalar;
+    
+    // Action
+    Vector3 v2 = v1 / scalar;
+
+    REQUIRE_THAT(v2.x, Catch::Matchers::WithinAbs(v2_x, margin));
+    REQUIRE_THAT(v2.y, Catch::Matchers::WithinAbs(v2_y, margin));
+    REQUIRE_THAT(v2.z, Catch::Matchers::WithinAbs(v2_z, margin));
 }
 
 
@@ -173,4 +213,19 @@ TEST_CASE("Vector3 can be cross multiplied", "[vector3]") {
     REQUIRE_THAT(v3.x, Catch::Matchers::WithinAbs(v3_x, margin));
     REQUIRE_THAT(v3.y, Catch::Matchers::WithinAbs(v3_y, margin));
     REQUIRE_THAT(v3.z, Catch::Matchers::WithinAbs(v3_z, margin));
+}
+
+
+TEST_CASE("Vector3 can get squared magnitude", "[vector3]") {
+    double v1_x = 1;
+    double v1_y = 2;
+    double v1_z = 3;
+    Vector3 v1(v1_x, v1_y, v1_z);
+
+    double v1_squaredMagnitudeTarget = v1_x * v1_x + v1_y * v1_y + v1_z * v1_z;
+
+    // Action
+    double v1_squaredMagnitude = v1.squaredMagnitude();
+
+    REQUIRE_THAT(v1_squaredMagnitude, Catch::Matchers::WithinAbs(v1_squaredMagnitudeTarget, margin));
 }
